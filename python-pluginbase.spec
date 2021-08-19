@@ -34,7 +34,6 @@ rm -rf *.egg-info
 
 %files
 %license LICENSE
-%doc README.md
 %{python_sitelib}/%{srcname}-*.egg-info/
 %{python_sitelib}/%{srcname}.py
 %{python_sitelib}/__pycache__/%{srcname}.*
