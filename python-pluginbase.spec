@@ -1,8 +1,8 @@
 %global srcname pluginbase
 
 Name:           python-%{srcname}
-Version:        1.0.0
-Release:        %mkrel 2
+Version:        1.0.1
+Release:        1
 Summary:        Support library for building plugins systems
 Group:          Development/Python
 
@@ -11,22 +11,14 @@ URL:            https://github.com/mitsuhiko/pluginbase
 Source0:        https://files.pythonhosted.org/packages/source/p/%{srcname}/%{srcname}-%{version}.tar.gz
 BuildArch:      noarch
 
-%global _description \
+%{?python_provide:%python_provide python3-%{srcname}}
+BuildRequires:  pkgconfig(python)
+BuildRequires:  python3dist(setuptools)
+BuildRequires:  python3dist(pytest)
+
+%description
 PluginBase is a module for Python that enables the development of flexible\
 plugin systems in Python.
-
-%description %{_description}
-
-%package -n python3-%{srcname}
-Summary:        Support library for building plugins systems
-%{?python_provide:%python_provide python3-%{srcname}}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-pytest
-
-%description -n python3-%{srcname} %{_description}
-
-Python 3 version.
 
 %prep
 %autosetup -n %{srcname}-%{version}
@@ -35,19 +27,19 @@ Python 3 version.
 rm -rf *.egg-info
 
 %build
-%py3_build
+%py_build
 
 %install
-%py3_install
+%py_install
 
 %check
 pushd tests
   PYTHONPATH=%{buildroot}%{python3_sitelib} py.test-%{python3_version} -v
 popd
 
-%files -n python3-%{srcname}
+%files
 %license LICENSE
 %doc README.md
-%{python3_sitelib}/%{srcname}-*.egg-info/
-%{python3_sitelib}/%{srcname}.py
-%{python3_sitelib}/__pycache__/%{srcname}.*
+%{python_sitelib}/%{srcname}-*.egg-info/
+%{python_sitelib}/%{srcname}.py
+%{python_sitelib}/__pycache__/%{srcname}.*
