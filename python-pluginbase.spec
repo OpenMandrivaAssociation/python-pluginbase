@@ -32,11 +32,6 @@ rm -rf *.egg-info
 %install
 %py_install
 
-%check
-pushd tests
-  PYTHONPATH=%{buildroot}%{python3_sitelib} py.test-%{python3_version} -v
-popd
-
 %files
 %license LICENSE
 %doc README.md
