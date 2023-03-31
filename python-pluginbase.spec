@@ -2,7 +2,7 @@
 
 Name:           python-%{srcname}
 Version:        1.0.1
-Release:        1
+Release:        2
 Summary:        Support library for building plugins systems
 Group:          Development/Python
 
